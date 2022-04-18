@@ -1,17 +1,14 @@
 import { useState } from "react";
 import todoService from "../services/todo.service";
-import { Todo } from "../stores/todo.store";
 
 export function useTodoInput() {
   const [error, setError] = useState("");
 
   const createTodo = async (title: string) => {
-    const todo = new Todo();
-    todo.title = title;
-
+    
     try {
-      await todoService.createTodo(todo);
-    } catch (e) {
+      await todoService.createTodo(title);
+    } catch (e: any) {
       setError(e.message);
     }
   };

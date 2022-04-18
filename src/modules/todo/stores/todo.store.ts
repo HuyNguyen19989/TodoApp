@@ -1,7 +1,7 @@
 import { Store } from "./store.class";
 
-export class Todo {
-  id: number;
+export interface Todo {
+  id: string;
   title: string;
   isDone: boolean;
 }
@@ -11,11 +11,6 @@ export interface TodoState {
 }
 
 class TodoStore extends Store<TodoState> {
-  addTodo(todo: Todo) {
-    const { todos } = this.getState();
-    todos.push(todo);
-    this.updateState({ todos });
-  }
 }
 
 const todoStore = new TodoStore({ todos: [] });

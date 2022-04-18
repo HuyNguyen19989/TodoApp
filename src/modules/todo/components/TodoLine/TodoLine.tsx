@@ -1,27 +1,31 @@
-import styled from "styled-components";
+import { Todo } from "../../stores/todo.store";
+import { TodoButtonGroup, TodoCheckBox, TodoDelete, TodoText, TodoWrapper } from "./styled-component";
+import  Modal  from "../modal/modal"
 
-const TodoText = styled.span<{ isDone: boolean }>`
-  text-decoration: ${(props) => (props.isDone ? "line-through" : "auto")};
-`;
-const TodoWrapper = styled.div`
-  padding: 5px 10px;
-  cursor: pointer;
 
-  &:hover {
-    background: gray;
-  }
-`;
 interface TodoLineProps {
-  title: string;
-  isDone: boolean;
-  onClick?: () => void;
+  todo: Todo;
+  updateTodo: (todo: Todo, e: any) => Promise<void>;
+  deleteTodo: (id: string) => Promise<void>;
 }
 
-export function TodoLine({ title, isDone, onClick }: TodoLineProps) {
+export function TodoLine({ todo, updateTodo, deleteTodo}: TodoLineProps) {
   return (
-    <TodoWrapper onClick={onClick}>
-      <input type="checkbox" />
-      <TodoText isDone={isDone}>{title}</TodoText>
+    <TodoWrapper>
+      <TodoText isDone={todo.isDone}>{todo.title}</TodoText>
+      <TodoButtonGroup>
+        <TodoCheckBox
+          type="checkbox"
+          onClick={(e) => updateTodo(todo, e)}
+          defaultChecked={todo.isDone}
+        />
+        <TodoDelete
+          src="/trash.svg"
+          alt="trash icon"
+          onClick={() => deleteTodo(todo.id)}
+        />
+      </TodoButtonGroup>
+      <Modal></Modal>
     </TodoWrapper>
   );
 }

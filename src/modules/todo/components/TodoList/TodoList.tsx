@@ -1,14 +1,15 @@
 import { useTodoList } from "../../hooks";
 import { TodoLine } from "../TodoLine/TodoLine";
-
+import { TodoListWrapper } from "./styled-component"; 
 export function TodoList() {
-  const { todos } = useTodoList();
+  const { todos, updateTodo, deleteTodo } = useTodoList();
 
   return (
-    <div>
+    <TodoListWrapper>
       {todos.map((todo) => (
-        <TodoLine key={todo.id} title={todo.title} isDone={todo.isDone} />
+        <TodoLine key={todo.id} todo={todo} updateTodo={updateTodo} deleteTodo={deleteTodo}/>
       ))}
-    </div>
+      
+    </TodoListWrapper>
   );
 }

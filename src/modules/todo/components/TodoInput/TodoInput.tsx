@@ -1,9 +1,10 @@
 import { useRef } from "react";
 import { useTodoInput } from "../../hooks";
+import { TodoInputWrapper, Input, PosetiveButton } from "./styled-component"
 
 export function TodoInput() {
-  const inputRef = useRef(null);
-  const { error, createTodo } = useTodoInput();
+  const inputRef = useRef<HTMLInputElement>(null);
+  const { createTodo } = useTodoInput();
 
   const onKeyDown = async (e: { key: string; target: any }) => {
     if (e.key === "Enter") {
@@ -15,19 +16,19 @@ export function TodoInput() {
   };
 
   const onAddClicked = async () => {
-    if (inputRef?.current) {
-      const value = inputRef.current.value;
-      if (value) {
-        await createTodo(value);
-      }
-      inputRef.current.value = "";
+      if (inputRef?.current) {
+        const value = inputRef.current.value;
+        if (value) {
+          await createTodo(value);
+        }
+        inputRef.current.value = "";
     }
   };
 
   return (
-    <div>
-      <input ref={inputRef} type="text" onKeyDown={onKeyDown} />
-      <button onClick={onAddClicked}>Add</button>
-    </div>
+    <TodoInputWrapper>
+      <Input ref={inputRef} type="text" onKeyDown={onKeyDown} placeholder="Add Todo"/>
+      <PosetiveButton onClick={onAddClicked}>Add</PosetiveButton>
+    </TodoInputWrapper>
   );
 }
