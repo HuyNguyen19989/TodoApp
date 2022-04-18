@@ -1,7 +1,7 @@
 import { useObservable } from "@ngneat/react-rxjs";
 import splashStore from "../stores/splash.store";
 
-export function useSplash(isDone?: boolean) {
+export function useSplash() {
   let splash$ = splashStore.pipe();
 
   let [splashState] = useObservable(splash$);

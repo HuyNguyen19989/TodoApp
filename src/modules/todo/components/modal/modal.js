@@ -45,7 +45,7 @@ const Modal = (props) => {
             <header className={style.modal__header}>
               <h2 className={style.modal__title}>{props.title}</h2>
             </header>
-            <main className={style.modal__content}>{props.children}</main>
+            <main className={style.modal__content}>{props.content? (<p>{props.content}</p>) : (props.children)}</main>
             {props.footer !== null &&
               (props.footer ? (
                 <footer className={style.modal__footer}>{props.footer}</footer>
